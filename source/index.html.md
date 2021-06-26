@@ -12,7 +12,6 @@ toc_footers:
 
 includes:
 
-- errors
 - contact
 
 search: true
@@ -249,3 +248,9 @@ ERROR | You provided an invalid Language Code
 <aside class="warning">
 This endpoint does not provide any method for server-side filtering, as such if you require filtering, it <i>must</i> be done client side.
 </aside>
+
+# Translators
+
+## Get All Registered Translators
+
+## Get Translator by ID
