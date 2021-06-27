@@ -170,8 +170,8 @@ List<TranslationModel> translations = JsonSerializer.Deserialize<List<Translatio
 
 Returns all translations (with the specified filter, if any) for a specific video.
 
-See the [SSE endpoint](#receive-new-translations-on-a-video) for the recommend endpoint to receive translations during
-a live stream.
+See the [SSE endpoint](#receive-new-translations-on-a-video) for the recommend endpoint to receive translations during a
+live stream.
 
 ### HTTP Request
 
@@ -188,7 +188,7 @@ language_code | The [ISO 639-1 language code](https://en.wikipedia.org/wiki/ISO_
 
 Parameter | Default | Description | Constraints
 --------- | ------- | ----------- | -----------
-since | `-1` | Only returns translations created after this timestamp (in ms from start of stream) | None
+since | `-1` | Only returns translations created after this timestamp (in milliseconds from start of stream) | 32-bit integer
 require | `null` | Only returns translations created by the specified translator(s) | A comma separated list of Translator IDs -- Mutually exclusive with `exclude`
 exclude | `null` | Don't return translations created by the specified translator(s) | A comma separated list of Translator IDs -- Mutually exclusive with `require`
 
@@ -205,7 +205,7 @@ Code | Description
 
 ```javascript
 // Requires the `eventsource` npm package when using NodeJS
-let source = new EventSource("https://api.livetl.app/translations/stream?videoId=testid");
+let source = new EventSource("https://api.livetl.app/translations/stream?videoId=example&languageCode=en");
 source.onmessage = msg => {
   console.log(msg.data);
 }
@@ -230,9 +230,9 @@ source.onmessage = msg => {
 }  
 ```
 
-A [Server Sent Events (SSE)](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events) endpoint to allow
-clients to use an [EventSource](https://developer.mozilla.org/en-US/docs/Web/API/EventSource) receive new translations
-for a language on a requested video immediately when they are created.
+A [Server Sent Events (SSE)](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events) endpoint that allows
+clients to use an [EventSource](https://developer.mozilla.org/en-US/docs/Web/API/EventSource) to receive new
+translations for a language on a requested video, immediately when they are created.
 
 <aside class="notice">
 This is the recommended way for clients to receive translations during a live stream.
