@@ -3,8 +3,8 @@ title: API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
 
-- javascript
-- csharp
+- javascript: Javascript
+- csharp: C#
 
 toc_footers:
 
@@ -102,15 +102,28 @@ If you're an existing third party service wishing to create an integration with 
 access to our Auth0 service to allow users to authenticate within your application by <a href="/#contact-us">contacting us</a>.
 </aside>
 
+Not every endpoint requires authentication, most notably the translations and translators endpoints, those that do
+require authentication will indicate so in their description.
+
 You're able to authenticate with the API using the same user accounts as used on [our website](https://livetl.app), and
 uses [JSON Web Tokens](https://jwt.io/introduction/) to authenticate with the API. You can obtain the JWT Access Token
 required to authenticate with the API by using an [Auth0 Library](https://auth0.com/docs/libraries) to sign in to your
 LiveTL account.
 
-Not every endpoint requires authentication, most notably the translations and translators endpoints, however there are
-several different endpoints that are restricted behind different permissions so that only authorized users can access
-them. If an endpoint requires authentication/authorization, it will be explicitly stated in the description of that
-endpoint.
+## Permissions and roles
+
+Most endpoints are restricted behind different permissions (which are assigned to roles, which are assigned to users) so
+that only authorized users can access them. If an endpoint requires a specific permission, it will be explicitly stated
+in the description of that endpoint.
+
+The following table describes each permission, along with what role has what permissions. The list will likely be
+updated and expanded upon as the API continues development.
+
+Permission | Roles | Description
+---------- | ----- | -----------
+`create:translations` | Registered, Verified | Allows the user to create new translations on videos
+`modify:translations` | Registered, Verified | Allows the user to modify (change or delete) their own translations
+`write:translations` | Verified | Allows the user to modify (change or delete) translations from any translator
 
 # Translations
 
@@ -249,6 +262,72 @@ ERROR | You provided an invalid Language Code
 This endpoint does not provide any method for server-side filtering, as such if you require filtering, it <i>must</i> be done client side.
 </aside>
 
+## Add Translation to Video
+
+> This endpoint requires [Authorization](/#authentication) with the `create:translations` permission
+
+```javascript
+let response = await fetch("https://api.livetl.app/translations/example", {
+  method: "POST",
+  headers: {
+    "Authorization": "Bearer {your_access_token}",
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    "translatedText": "This is an example translation",
+    "start": 150,
+    "languageCode": "en"
+  })
+});
+let success = response.status === 201;
+```
+
+```csharp
+RestClient client = new RestClient("https://api.livetl.app/translations/example");
+RestRequest request = new RestRequest(Method.POST);
+request.AddHeader("Authorization", $"Bearer {your_access_token}");
+request.AddHeader("Content-Type", "application/json");
+request.AddJsonBody(new TranslationModel {
+    TranslatedText = "This is an example translation",
+    Start = 150,
+    LanguageCode = "en"
+});
+IRestResponse response = await client.ExecuteAsync(request);
+bool success = response.IsSuccessful;
+```
+
+Add a new translation to a video. The API expects a valid (see 'Request Body' section below) JSON object in the body of
+the request. Property names are not case sensitive.
+
+This endpoint requires [Authorization](/#authentication) with the `create:translations` permission.
+
+### HTTP Request
+
+`POST https://api.livetl.app/translations/{video_id}`
+
+### Request Body
+
+Property | Required | Description | Constraints
+-------- | -------- | ----------- | -----------
+LanguageCode | Yes | The language the translation is for | Valid [ISO 639-1 language code](https://en.wikipedia.org/wiki/ISO_639-1)
+TranslatedText | Yes | The translation itself | Non-empty string
+Start | Yes | The timestamp (in milliseconds) to display the translation at | 32-bit integer, greater than or equal to 0
+End | No | The timestamp (in milliseconds) to stop displaying the translation at. Useful for clients that display translations as a caption on the video, or for exporting to a subtitle format (such as SRT or ASS) | 32-bit integer, greater than `Start`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+video_id | The YouTube Video ID (ie `dQw4w9WgXcQ` from `https://www.youtube.com/watch?v=dQw4w9WgXcQ`) to add the translation to
+
+Code | Description
+---- | -----------
+201 Created | The API has added the translation to the database (and cache, if applicable)
+400 Bad Request | You didn't include all the required properties in the JSON body
+400 Bad Request | You provided an unknown language code, or invalid start/end timestamp
+400 Bad Request | The translator who authorized the request has not been registered in the database as a translator, but still somehow has the permission a registered translator does (this is likely a bug, please [contact us](/#contact) to report it)
+500 Server Error | The API encountered an error when adding the translation to the database
+asdfasdf
 # Translators
 
 ## Get All Registered Translators
