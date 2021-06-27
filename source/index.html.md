@@ -327,7 +327,7 @@ Code | Description
 400 Bad Request | You provided an unknown language code, or invalid start/end timestamp
 400 Bad Request | The translator who authorized the request has not been registered in the database as a translator, but still somehow has the permission a registered translator does (this is likely a bug, please [contact us](/#contact) to report it)
 500 Server Error | The API encountered an error when adding the translation to the database
-asdfasdf
+
 # Translators
 
 ## Get All Registered Translators
