@@ -26,7 +26,7 @@ updates (via [Server Sent Events](https://developer.mozilla.org/en-US/docs/Web/A
 new translations, as they are added.
 
 The primary data served by the API is publicly available, however we ask that you don't attempt to scrape all our data,
-if you'd like a datadump of our translations, please [get in touch](/#contact).
+if you'd like a datadump of our translations, please [get in touch](#contact-us).
 
 ## Examples
 
@@ -58,7 +58,7 @@ have each instance of the client send a request to the server on initialization,
 ### Languages
 
 Clients should maintain a local list of the [ISO 639-1 Language Codes](https://en.wikipedia.org/wiki/ISO_639-1)
-supported by the API. This list should be [obtained](/#languages) ***once*** by the client and stored on the user's
+supported by the API. This list should be [obtained](#languages) ***once*** by the client and stored on the user's
 machine.
 
 The only time a client should request this list again, is if for some reason the API sends a language code that the
@@ -68,8 +68,8 @@ pre-populated with nearly every language code, and the data is not expected to e
 ### Translators
 
 Clients should store a local list of translators the client has seen. An easy (but not necessary) way to pre-populate
-this list is to [get all registered translators](/#get-all-registered-translators). Clients should send a request
-to [get translator information](/#get-translator-by-id) when they encounter a translator ID that is not in their local
+this list is to [get all registered translators](#get-all-registered-translators). Clients should send a request
+to [get translator information](#get-translator-by-id) when they encounter a translator ID that is not in their local
 list.
 
 # Authentication
@@ -170,7 +170,7 @@ List<TranslationModel> translations = JsonSerializer.Deserialize<List<Translatio
 
 Returns all translations (with the specified filter, if any) for a specific video.
 
-See the [SSE endpoint](/#receive-new-translations-on-a-video) for the recommend endpoint to receive translations during
+See the [SSE endpoint](#receive-new-translations-on-a-video) for the recommend endpoint to receive translations during
 a live stream.
 
 ### HTTP Request
@@ -264,7 +264,7 @@ This endpoint does not provide any method for server-side filtering, as such if 
 
 ## Add Translation to Video
 
-> This endpoint requires [Authorization](/#authentication) with the `create:translations` permission
+> This endpoint requires [Authorization](#authentication) with the `create:translations` permission
 
 ```javascript
 let response = await fetch("https://api.livetl.app/translations/example", {
@@ -299,7 +299,7 @@ bool success = response.IsSuccessful;
 Add a new translation to a video. The API expects a valid (see 'Request Body' section below) JSON object in the body of
 the request. Property names are not case sensitive.
 
-This endpoint requires [Authorization](/#authentication) with the `create:translations` permission.
+This endpoint requires [Authorization](#authentication) with the `create:translations` permission.
 
 ### HTTP Request
 
@@ -325,7 +325,7 @@ Code | Description
 201 Created | The API has added the translation to the database (and cache, if applicable)
 400 Bad Request | You didn't include all the required properties in the JSON body
 400 Bad Request | You provided an unknown language code, or invalid start/end timestamp
-400 Bad Request | The translator who authorized the request has not been registered in the database as a translator, but still somehow has the permission a registered translator does (this is likely a bug, please [contact us](/#contact) to report it)
+400 Bad Request | The translator who authorized the request has not been registered in the database as a translator, but still somehow has the permission a registered translator does (this is likely a bug, please [contact us](#contact-us) to report it)
 500 Server Error | The API encountered an error when adding the translation to the database
 
 # Translators
