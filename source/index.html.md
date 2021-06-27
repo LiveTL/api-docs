@@ -227,7 +227,7 @@ This is the recommended way for clients to receive translations during a live st
 
 ### Event Source URL
 
-`https://api.livetl.app/translations/translations/stream?videoId={video_id}?languageCode={language_code}`
+`https://api.livetl.app/translations/stream?videoId={video_id}?languageCode={language_code}`
 
 ### URL Parameters
 
