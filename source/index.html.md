@@ -28,6 +28,10 @@ new translations, as they are added.
 The primary data served by the API is publicly available, however we ask that you don't attempt to scrape all our data,
 if you'd like a datadump of our translations, please [get in touch](#contact-us).
 
+## Attribution
+
+TODO
+
 ## Examples
 
 We've written example code for the primary scenario of each endpoint, available in both Javascript and C#.
@@ -71,6 +75,12 @@ Clients should store a local list of translators the client has seen. An easy (b
 this list is to [get all registered translators](#get-all-registered-translators). Clients should send a request
 to [get translator information](#get-translator-by-id) when they encounter a translator ID that is not in their local
 list.
+
+This list can be updated periodically so that any newly registered translators, or changes made to translator profiles
+are synchronized to the client. This update should be done infrequently if you're using the
+[get all registered translators](#get-all-registered-translators) endpoint, preferably no more than once per day, but
+updating individual translators as you require their information can be done much more frequently, and thus should be
+the primary methods clients should use.
 
 # Authentication
 
@@ -126,6 +136,30 @@ Permission | Roles | Description
 `write:translations` | Verified | Allows the user to modify (change or delete) translations from any translator
 
 # Translations
+
+## Overview
+
+The translation object sent by the API contains the minimum amount of information needed, and the client is expected to
+look up (preferably using it's local cache) information about the translator and language.
+
+Note that translations contain both a start and an end time. This is so that translations can be exported into standard
+subtitle formats (such as [SRT](https://en.wikipedia.org/wiki/SubRip) or
+[SSA/ASS](https://en.wikipedia.org/wiki/SubStation_Alpha)) or be displayed over a video player, should clients choose to
+implement that. However, translations that were added while a stream was live will not include an end time, and clients
+requiring one to be present should ensure to use a default value of some sort. When adding (or updating) translations
+after a stream has ended, clients should ensure that a user enters an end time.
+
+The translation object contains the following properties:
+
+Property | Type | Description
+-------- | ---- | -----------
+Id | 64-bit integer | The unique identifier for the translation
+VideoId | string | The ID of the YouTube video this translation is for
+TranslatorId | string | The ID of the translator who submitted the translation
+LanguageCode | string | The [ISO 639-1 language code](https://en.wikipedia.org/wiki/ISO_639-1) of the language being translated to
+TranslatedText | string | The actual text content of the translation
+Start | 32-bit integer | The timestamp (in milliseconds) the translation starts at
+End | 32-bit integer | The timestamp (in milliseconds) the translation starts at
 
 ## Get All Translations on a Video
 
@@ -330,6 +364,180 @@ Code | Description
 
 # Translators
 
+## Overview
+
+The translator object sent by the API contains information about a translator for displaying alongside translations in a
+client. The API only responds with information about users who have registered as a translator, and not normal users who
+have only signed up for a LiveTL account.
+
+Please be sure to read about the [local caching expectations](#translators) before implementing usage of these endpoints
+into your client.
+
+The translator object contains the following properties:
+
+Property | Type | Description
+-------- | ---- | ----------
+UserId | string | The unique identifier (assigned by Auth0) for the translator
+DisplayName | string | The name the translator has set to be displayed by clients
+ProfilePictureUrl | string | The URL where the users profile picture (if set) is located at
+Type | string | The [translator account type](#account-types) of the translator
+Languages | Language[] | A list of [Language objects](#languages-2) the translator is registered under
+
+## Account Types
+
+Currently there are only two implemented account types, Registered and Verified. Additional types may be added at some
+point in the future, but none are currently planned.
+
+Registered translators are any user who has signed up for a LiveTL account and registered that account as a translator.
+LiveTL has no involvement in who can register as a translator, but reserves the right to 'ban' translators who
+consistently and intentionally submit low quality or inaccurate translations, as these are potentially harmful to both
+streamers and the community.
+
+Verified translators are registered translators who have submitted an application to LiveTL with information that
+verifies them as a professional translator, or is recognized and approved by a well-known community official (ie modded
+by a streamer they translate for). These translators are typically considered to have higher quality or more accurate
+translations than normal registered translators, and as such clients developed by the LiveTL team will differentiate
+between the two. Third party clients are not required or expected to differentiate them.
+
 ## Get All Registered Translators
 
+```javascript
+let response = await fetch("https://api.livetl.app/translators/registered");
+let translators = await response.json();
+```
+
+```csharp
+RestClient client = new RestClient("https://api.livetl.app/translators/registered");
+RestRequest request = new RestRequest(Method.GET);
+IRestResponse response = await client.ExecuteAsync(request);
+List<Translator> translators = JsonSerializer.Deserialize<List<Translator>>(response.Content, new JsonSerializerOptions {
+    PropertyNameCaseInsensitive = true
+});
+```
+
+> The endpoint returns a list of JSON objects like this:
+
+```json
+[
+  {
+    "languages": [
+      {
+        "code": "en",
+        "name": "English",
+        "nativeName": "English"
+      },
+      {
+        "code": "ja",
+        "name": "Japanese",
+        "nativeName": "日本語"
+      }
+    ],
+    "type": "Registered",
+    "userID": "auth0|60c195aa5d89a500699c01cc",
+    "displayName": "grumpybear4257",
+    "profilePictureUrl": "https://s.gravatar.com/avatar/6aaef03e46b8344a9178a565a4ef70e4?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fgr.png"
+  },
+  {
+    "languages": [
+      {
+        "code": "en",
+        "name": "English",
+        "nativeName": "English"
+      },
+      {
+        "code": "ja",
+        "name": "Japanese",
+        "nativeName": "日本語"
+      }
+    ],
+    "type": "Verified",
+    "userID": "auth0|60cafad9612d820070a6c388",
+    "displayName": "kamishirotaishi",
+    "profilePictureUrl": "https://s.gravatar.com/avatar/50202936063379c31b0b03084eb48067?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fka.png"
+  }
+]
+```
+
+Returns all registered translators (including verified).
+
+### HTTP Request
+
+`GET https://api.livetl.app/translators/registered`
+
+### Possible HTTP Response Status Codes
+
+Code | Description
+---- | -----------
+200 OK | The API found and returned all translators who have registered
+404 Not Found | There are no translators who have registered
+
 ## Get Translator by ID
+
+```javascript
+let response = await fetch("https://api.livetl.app/translators/auth0|60cafad9612d820070a6c388");
+let translator = await response.json();
+```
+
+```csharp
+RestClient client = new RestClient("https://api.livetl.app/translators/auth0|60cafad9612d820070a6c388");
+RestRequest request = new RestRequest(Method.GET);
+IRestResponse response = await client.ExecuteAsync(request);
+Translator translator = JsonSerializer.Deserialize<Translator>(response.Content, new JsonSerializerOptions {
+    PropertyNameCaseInsensitive = true
+});
+```
+
+> The endpoint returns a JSON object like this:
+
+```json
+{
+  "languages": [
+    {
+      "code": "en",
+      "name": "English",
+      "nativeName": "English"
+    },
+    {
+      "code": "ja",
+      "name": "Japanese",
+      "nativeName": "日本語"
+    }
+  ],
+  "type": "Verified",
+  "userID": "auth0|60cafad9612d820070a6c388",
+  "displayName": "kamishirotaishi",
+  "profilePictureUrl": "https://s.gravatar.com/avatar/50202936063379c31b0b03084eb48067?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fka.png"
+}
+```
+
+Finds a specific translator, using their User ID.
+
+### HTTP Request
+
+`GET https://api.livetl.app/translators/{user_id}`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+user_id | The ID of the user to find
+
+### Possible HTTP Response Status Codes
+
+Code | Description
+---- | -----------
+200 OK | The API found and returned the translator with the specified ID
+404 Not Found | There is no translator with the specified ID
+
+# Languages
+
+The API uses [ISO 639-1 Languages](https://en.wikipedia.org/wiki/ISO_639-1) as it's list of supported languages, and the
+language object is just it's way to represent those.
+
+The language object contains the following properties:
+
+Property | Type | Description
+-------- | ---- | ----------
+Code | string | The 2-character, unique identifier of the language
+Name | string | The name of the language as used in English
+NativeName | string | The name of the language as used in that language
