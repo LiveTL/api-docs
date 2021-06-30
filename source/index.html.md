@@ -381,7 +381,7 @@ UserId | string | The unique identifier (assigned by Auth0) for the translator
 DisplayName | string | The name the translator has set to be displayed by clients
 ProfilePictureUrl | string | The URL where the users profile picture (if set) is located at
 Type | string | The [translator account type](#account-types) of the translator
-Languages | Language[] | A list of [Language objects](#languages-2) the translator is registered under
+Languages | Language[] | An array of [language objects](#languages-2) the translator is registered under
 
 ## Account Types
 
