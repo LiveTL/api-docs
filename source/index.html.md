@@ -239,7 +239,7 @@ Code | Description
 
 ```javascript
 // Requires the `eventsource` npm package when using NodeJS
-let source = new EventSource("https://api.livetl.app/translations/stream?videoId=example&languageCode=en");
+let source = new EventSource("https://api.livetl.app/notifications/translations?videoId=example&languageCode=en");
 source.onmessage = msg => {
   console.log(msg.data);
 }
@@ -274,7 +274,7 @@ This is the recommended way for clients to receive translations during a live st
 
 ### Event Source URL
 
-`https://api.livetl.app/translations/stream?videoId={video_id}?languageCode={language_code}`
+`https://api.livetl.app/notifications/translations?videoId={video_id}?languageCode={language_code}`
 
 ### URL Parameters
 
