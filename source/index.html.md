@@ -37,9 +37,8 @@ TODO
 We've written example code for the primary scenario of each endpoint, available in both Javascript and C#.
 
 The examples have been written and tested with specific environments in mind; Javascript in the browser (though most
-should work in NodeJS with no additional packages) and C# on .NET Core 3.1
-(using [RestSharp](https://www.nuget.org/packages/RestSharp), and the (currently internal) `LiveTL.Common` class
-library).
+should work in NodeJS with no additional packages) and C# on .NET Core 3.1 (using the (currently
+internal) `LiveTL.Common` class library).
 
 If an endpoint requires specific additional packages, it will be explicitly mentioned in a comment of the example code
 for that endpoint.
@@ -94,17 +93,16 @@ Authorization: Bearer {your_access_token}
 
 ```javascript
 let response = await fetch("https://api.livetl.app/some/endpoint/with/auth", {
-  headers: {
-    "Authorization": "Bearer {your_access_token}"
-  }
+    headers: {
+        "Authorization": "Bearer {your_access_token}"
+    }
 });
 ```
 
 ```csharp
-RestClient client = new RestClient("https://api.livetl.app/some/endpoint/with/auth");
-RestRequest request = new RestRequest(Method.GET);
-request.AddHeader("Authorization", "Bearer {your_access_token}");
-IRestResponse response = await client.ExecuteAsync(request);
+using HttpClient client = new HttpClient();
+client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", {your_access_token});
+HttpResponseMessage response = await _client.GetAsync("https://api.livetl.app/some/endpoint/with/auth");
 ```
 
 <aside class="notice">
@@ -112,8 +110,10 @@ If you're an existing third party service wishing to create an integration with 
 access to our Auth0 service to allow users to authenticate within your application by <a href="/#contact-us">contacting us</a>.
 </aside>
 
-Not every endpoint requires authentication, most notably the translations and translators endpoints, those that do
-require authentication will indicate so in their description.
+Not every endpoint requires authentication, most notably the get translations and get translators endpoints. Endpoints
+that do require authentication will indicate so in their description. When requesting without a valid authorization
+token present or the user does not have the required permission node for the endpoint, the API will return a
+`403 - Forbidden` status.
 
 You're able to authenticate with the API using the same user accounts as used on [our website](https://livetl.app), and
 uses [JSON Web Tokens](https://jwt.io/introduction/) to authenticate with the API. You can obtain the JWT Access Token
@@ -169,10 +169,9 @@ let translations = await response.json();
 ```
 
 ```csharp
-RestClient client = new RestClient("https://api.livetl.app/translations/example/en");
-RestRequest request = new RestRequest(Method.GET);
-IRestResponse response = await client.ExecuteAsync(request);
-List<TranslationModel> translations = JsonSerializer.Deserialize<List<TranslationModel>>(response.Content, new JsonSerializerOptions {
+using HttpClient client = new HttpClient();
+HttpResponseMessage response = await client.GetAsync("https://api.livetl.app/translations/example/en");
+List<TranslationModel> translations = JsonSerializer.Deserialize<List<TranslationModel>>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions {
     PropertyNameCaseInsensitive = true
 });
 ```
@@ -241,7 +240,7 @@ Code | Description
 // Requires the `eventsource` npm package when using NodeJS
 let source = new EventSource("https://api.livetl.app/notifications/translations?videoId=example&languageCode=en");
 source.onmessage = msg => {
-  console.log(msg.data);
+    console.log(msg.data);
 }
 ```
 
@@ -302,32 +301,30 @@ This endpoint does not provide any method for server-side filtering, as such if 
 
 ```javascript
 let response = await fetch("https://api.livetl.app/translations/example", {
-  method: "POST",
-  headers: {
-    "Authorization": "Bearer {your_access_token}",
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    "translatedText": "This is an example translation",
-    "start": 150,
-    "languageCode": "en"
-  })
+    method: "POST",
+    headers: {
+        "Authorization": "Bearer {your_access_token}",
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        "translatedText": "This is an example translation",
+        "start": 150,
+        "languageCode": "en"
+    })
 });
 let success = response.status === 201;
 ```
 
 ```csharp
-RestClient client = new RestClient("https://api.livetl.app/translations/example");
-RestRequest request = new RestRequest(Method.POST);
-request.AddHeader("Authorization", $"Bearer {your_access_token}");
-request.AddHeader("Content-Type", "application/json");
-request.AddJsonBody(new TranslationModel {
+using HttpClient client = new HttpClient();
+client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", {your_access_token});
+StringContent content = new StringContent(JsonSerializer.Serialize(new TranslationModel {
     TranslatedText = "This is an example translation",
     Start = 150,
     LanguageCode = "en"
-});
-IRestResponse response = await client.ExecuteAsync(request);
-bool success = response.IsSuccessful;
+}), Encoding.UTF8, "application/json");
+HttpResponseMessage response = await client.PostAsync("https://api.livetl.app/translations/example", content);
+bool success = response.IsSuccessStatusCode;
 ```
 
 Add a new translation to a video. The API expects a valid (see 'Request Body' section below) JSON object in the body of
@@ -361,6 +358,128 @@ Code | Description
 400 Bad Request | You provided an unknown language code, or invalid start/end timestamp
 400 Bad Request | The translator who authorized the request has not been registered in the database as a translator, but still somehow has the permission a registered translator does (this is likely a bug, please [contact us](#contact-us) to report it)
 500 Server Error | The API encountered an error when adding the translation to the database
+
+## Update a Translation
+
+> This endpoint requires [Authorization](#authentication) with the `modify:translations` or `write:translations` permissions
+
+```javascript
+let response = await fetch("https://api.livetl.app/translations/1", {
+    method: "PUT",
+    headers: {
+        "Authorization": "Bearer {your_access_token}",
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        "translatedText": "This is a modification to an existing translation"
+    })
+});
+let modifiedOrNotNeccessary = response.status === 204 || response.status === 200;
+```
+
+```csharp
+using HttpClient client = new HttpClient();
+client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", {your_access_token});
+StringContent content = new StringContent(JsonSerializer.Serialize(new TranslationModel {
+    TranslatedText = "This is a modification to an existing translation"
+}), Encoding.UTF8, "application/json");
+HttpResponseMessage response = await client.PutAsync("https://api.livetl.app/translations/1");
+bool modifiedOrNotNeccessary = response.StatusCode == HttpStatusCode.NoContent || resposne.StatusCode == HttpStatusCode.OK;
+```
+
+Modifies an existing translation. The API expects a valid (see 'Request Body' section below) JSON object in the body of
+the request. Property names are not case sensitive.
+
+The cache is not immediately updated with modifications made using this endpoint, and may take up to 1 hour to refresh.
+
+This endpoint requires [Authorization](#authentication) with the `modify:translations` or `write:translations`
+permissions. Users with `write:translations` can modify any translation, users with `modify:translations` can only
+modify their own.
+
+### HTTP Request
+
+`PUT https://api.livetl.app/translations/{translation_id}`
+
+### Request Body
+
+Note that while all properties are optional, at least one property must be set. If other translation properties are
+included in the object, they will be ignored and return `200 - No modifications are required`.
+
+Property | Required | Description | Constraints
+-------- | -------- | ----------- | -----------
+TranslatedText | No | The new translation text | Non-empty string
+Start | No | The new timestamp (in milliseconds) to display the translation at | 32-bit integer, greater than or equal to 0
+End | No | The new timestamp (in milliseconds) to stop displaying the translation at | 32-bit integer, greater than `Start`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+translation_id | The ID of the translation to modify
+
+Code | Description
+---- | -----------
+204 No Content | The API has modified the translation specified
+400 Bad Request | You didn't include any properties in the JSON body
+404 Not Found | A translation does not exist with the specified ID
+403 Forbidden | You attempted to modify a translation you don't have permission for
+500 Server Error | The API encountered an error when updating the translation in the database
+
+## Delete a Translation
+
+> This endpoint requires [Authorization](#authentication) with the `modify:translations` or `write:translations` permissions
+
+```javascript
+let response = await fetch("https://api.livetl.app/translations/1", {
+    method: "DELETE",
+    headers: {
+        "Authorization": "Bearer {your_access_token}",
+        "Content-Type": "application/json"
+    },
+    body: "Innaccurate/troll translation"
+});
+let deletedOrRequested = response.status === 204 || response.status === 202;
+```
+
+```csharp
+using HttpClient client = new HttpClient();
+client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", {your_access_token});
+HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Delete, "https://api.livetl.app/translations/1");
+request.Content = new StringContent("Innaccurate/troll translation", Encoding.UTF8, "text/plain");
+HttpResponseMessage response = await client.SendAsync(request);
+bool deletedOrRequested = response.StatusCode == HttpStatusCode.NoContent || resposne.StatusCode == HttpStatusCode.Accepted;
+```
+
+Deletes an existing translation. The API expects a plain-text string in the body of the request for the reason.
+
+The cache is not immediately updated with deletions made using this endpoint, and may take up to 1 hour to refresh.
+
+This endpoint requires [Authorization](#authentication) with the `modify:translations` or `write:translations`
+permissions. Users with `write:translations` can delete any translation, users with `modify:translations` can only
+delete their own, other translations will have a delete request submitted for review by verified translators.
+
+### HTTP Request
+
+`DELETE https://api.livetl.app/translations/{translation_id}`
+
+### Request Body
+
+A string containing the reason why you are deleting the translation.
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+translation_id | The ID of the translation to delete
+
+Code | Description
+---- | -----------
+204 No Content | The API has deleted the translation specified
+202 Accepted | The API has created a deletion request for the translation specified
+400 Bad Request | You didn't include a deletion reason
+404 Not Found | A translation does not exist with the specified ID
+500 Server Error | The API encountered an error when deleting the translation from the database
+500 Server Error | The API encountered an error when creating the deletion request for the translation in the database
 
 # Translators
 
