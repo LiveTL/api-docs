@@ -492,6 +492,35 @@ Code | Description
 
 > This endpoint requires [Authorization](#authentication) with the `create:translations` permission
 
+```js
+// this example is written using an old nodejs fs method, which isn't exactly the modern standard for file reading
+// however it's only intended to be a very basic example method to obtain the data to send
+// you may have have different requirements for your application, and should use whatever fits your needs
+fs.readFile("/path/to/subtitle/file", "utf8", async (err, fileContents) => {
+    if (err)
+        return;
+
+    let response = await fetch("https://api.livetl.app/translations/example/en/subtitles", {
+        method: "POST",
+        headers: {
+            "Authorization": "Bearer {your_access_token}",
+            "Content-Type": "text/plain"
+        },
+        body: fileContents
+    });
+    let success = response.status === 200;
+});
+```
+
+```csharp
+using HttpClient client = new HttpClient();
+client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", {your_access_token});
+using StreamReader file = File.OpenText("/path/to/subtitle/file");
+StringContent content = new StringContent(await file.ReadToEndAsync(), Encoding.UTF8, "text/plain");
+HttpResponseMessage response = await client.PostAsync("https://api.livetl.app/translations/example/en/subtitles", content);
+bool success = response.IsSuccessStatusCode;
+```
+
 Allows for bulk addition of translations for a video. The API expects a valid subtitle file (see 'Supported Formats'
 section below) in plain-text in the body of the request.
 
