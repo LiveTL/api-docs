@@ -351,6 +351,8 @@ Parameter | Description
 --------- | -----------
 video_id | The YouTube Video ID (ie `dQw4w9WgXcQ` from `https://www.youtube.com/watch?v=dQw4w9WgXcQ`) to add the translation to
 
+### Possible HTTP Response Status Codes
+
 Code | Description
 ---- | -----------
 201 Created | The API has added the translation to the database (and cache, if applicable)
@@ -417,6 +419,8 @@ Parameter | Description
 --------- | -----------
 translation_id | The ID of the translation to modify
 
+### Possible HTTP Response Status Codes
+
 Code | Description
 ---- | -----------
 204 No Content | The API has modified the translation specified
@@ -471,6 +475,8 @@ A string containing the reason why you are deleting the translation.
 Parameter | Description
 --------- | -----------
 translation_id | The ID of the translation to delete
+
+### Possible HTTP Response Status Codes
 
 Code | Description
 ---- | -----------
@@ -647,6 +653,60 @@ Code | Description
 ---- | -----------
 200 OK | The API found and returned the translator with the specified ID
 404 Not Found | There is no translator with the specified ID
+
+## Register as Translator
+
+> This endpoint requires [Authorization](#authentication)
+
+```javascript
+let response = await fetch("https://api.livetl.app/translators/register", {
+    method: "POST",
+    headers: {
+        "Authorization": "Bearer {your_access_token}",
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify([
+        "en", "ja"
+    ])
+});
+let success = response.status === 200;
+```
+
+```csharp
+StringContent content = new StringContent(JsonSerializer.Serialize(new string[] {
+    "en", "ja"
+}), Encoding.UTF8, "application/json");
+HttpResponseMessage response = await client.PostAsync("https://api.livetl.app/translators/register", content);
+bool success = response.IsSuccessStatusCode;
+```
+
+Registers a LiveTL Auth0 user as a translator with the API.
+
+This endpoint requires [Authorization](#authentication).
+
+### HTTP Request
+
+`POST https://api.livetl.app/translators/register`
+
+### Request Body
+
+The body of this request is not an object with properties, but rather a single JSON array. Other translator information
+required by the API will be retrieved from the Auth0 user information.
+
+Property | Required | Description | Constraints
+-------- | -------- | ----------- | -----------
+Languages | Yes | The languages the translator is able to translate to/from | JSON Array of [ISO 639-1 Language Codes](https://en.wikipedia.org/wiki/ISO_639-1)
+
+### Possible HTTP Response Status Codes
+
+Code | Description
+---- | -----------
+200 OK | The API successfully registered the user as a translator
+400 Bad Request | You didn't include any translatable languages, or the ones you included are not valid
+400 Bad Request | You have already registered as a translator
+500 Server Error | The API encountered an error when retrieving user information from Auth0
+500 Server Error | The API encountered an error when registering the translator
+500 Server Error | The API encountered an error when adding permission roles to the user on Auth0
 
 # Languages
 
