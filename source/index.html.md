@@ -492,7 +492,7 @@ Code | Description
 
 > This endpoint requires [Authorization](#authentication) with the `create:translations` permission
 
-```js
+```javascript
 // this example is written using an old nodejs fs method, which isn't exactly the modern standard for file reading
 // however it's only intended to be a very basic example method to obtain the data to send
 // you may have have different requirements for your application, and should use whatever fits your needs
