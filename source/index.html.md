@@ -336,6 +336,12 @@ This endpoint requires [Authorization](#authentication) with the `create:transla
 
 `POST https://api.livetl.app/translations/{video_id}`
 
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+video_id | The YouTube Video ID (ie `dQw4w9WgXcQ` from `https://www.youtube.com/watch?v=dQw4w9WgXcQ`) to add the translation to
+
 ### Request Body
 
 Property | Required | Description | Constraints
@@ -345,17 +351,12 @@ TranslatedText | Yes | The translation itself | Non-empty string
 Start | Yes | The timestamp (in milliseconds) to display the translation at | 32-bit integer, greater than or equal to 0
 End | No | The timestamp (in milliseconds) to stop displaying the translation at. Useful for clients that display translations as a caption on the video, or for exporting to a subtitle format (such as SRT or ASS) | 32-bit integer, greater than `Start`
 
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-video_id | The YouTube Video ID (ie `dQw4w9WgXcQ` from `https://www.youtube.com/watch?v=dQw4w9WgXcQ`) to add the translation to
-
 ### Possible HTTP Response Status Codes
 
 Code | Description
 ---- | -----------
 201 Created | The API has added the translation to the database (and cache, if applicable)
+400 Bad Request | You didn't provide a valid YouTube Video ID
 400 Bad Request | You didn't include all the required properties in the JSON body
 400 Bad Request | You provided an unknown language code, or invalid start/end timestamp
 400 Bad Request | The translator who authorized the request has not been registered in the database as a translator, but still somehow has the permission a registered translator does (this is likely a bug, please [contact us](#contact-us) to report it)
@@ -402,6 +403,12 @@ modify their own.
 
 `PUT https://api.livetl.app/translations/{translation_id}`
 
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+translation_id | The ID of the translation to modify
+
 ### Request Body
 
 Note that while all properties are optional, at least one property must be set. If other translation properties are
@@ -412,12 +419,6 @@ Property | Required | Description | Constraints
 TranslatedText | No | The new translation text | Non-empty string
 Start | No | The new timestamp (in milliseconds) to display the translation at | 32-bit integer, greater than or equal to 0
 End | No | The new timestamp (in milliseconds) to stop displaying the translation at | 32-bit integer, greater than `Start`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-translation_id | The ID of the translation to modify
 
 ### Possible HTTP Response Status Codes
 
@@ -466,15 +467,15 @@ delete their own, other translations will have a delete request submitted for re
 
 `DELETE https://api.livetl.app/translations/{translation_id}`
 
-### Request Body
-
-A string containing the reason why you are deleting the translation.
-
 ### URL Parameters
 
 Parameter | Description
 --------- | -----------
 translation_id | The ID of the translation to delete
+
+### Request Body
+
+A string containing the reason why you are deleting the translation.
 
 ### Possible HTTP Response Status Codes
 
@@ -486,6 +487,47 @@ Code | Description
 404 Not Found | A translation does not exist with the specified ID
 500 Server Error | The API encountered an error when deleting the translation from the database
 500 Server Error | The API encountered an error when creating the deletion request for the translation in the database
+
+## Import Translations for Video from Subtitle File
+
+> This endpoint requires [Authorization](#authentication) with the `create:translations` permission
+
+Allows for bulk addition of translations for a video. The API expects a valid subtitle file (see 'Supported Formats'
+section below) in plain-text in the body of the request.
+
+This endpoint requires [Authorization](#authentication) with the `create:translations` permission
+
+### HTTP Request
+
+`POST https://api.livetl.app/translations/{video_id}/{language_code}/subtitles`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+video_id | The YouTube Video ID (ie `dQw4w9WgXcQ` from `https://www.youtube.com/watch?v=dQw4w9WgXcQ`) to import translations for
+language_code | The [ISO 639-1 language code](https://en.wikipedia.org/wiki/ISO_639-1) of the language the translations should be imported to
+
+### Supported Formats
+
+The API currently supports parsing [SubRip](https://en.wikipedia.org/wiki/SubRip) and
+[SubStation Alpha](https://en.wikipedia.org/wiki/SubStation_Alpha) files, though more may be added later.
+
+<aside class="warning">
+Note that the only information the API parses from these formats is the start and end timecodes, and the subtitle text content. This
+means that any styles or typesetting present in the file are completely discarded. 
+</aside>
+
+### Possible HTTP Response Status Codes
+
+Code | Description
+---- | -----------
+200 OK | The API imported the subtitles into translations in the specified language for the specified video
+400 Bad Request | You didn't provide a valid YouTube Video ID
+400 Bad Request | You provided an unknown language code
+400 Bad Request | The translator who authorized the request has not been registered in the database as a translator, but still somehow has the permission a registered translator does (this is likely a bug, please contact us to report it)
+400 Bad Request | The API was unable to parse any translations from the request body
+500 Server Error | The API encountered an error when importing the translations to the the database
 
 # Translators
 
@@ -656,7 +698,7 @@ Code | Description
 
 ## Register as Translator
 
-> This endpoint requires [Authorization](#authentication)
+> This endpoint requires [Authentication](#authentication)
 
 ```javascript
 let response = await fetch("https://api.livetl.app/translators/register", {
@@ -682,7 +724,7 @@ bool success = response.IsSuccessStatusCode;
 
 Registers a LiveTL Auth0 user as a translator with the API.
 
-This endpoint requires [Authorization](#authentication).
+This endpoint requires [Authentication](#authentication).
 
 ### HTTP Request
 
