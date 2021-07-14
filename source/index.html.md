@@ -425,6 +425,7 @@ End | No | The new timestamp (in milliseconds) to stop displaying the translatio
 Code | Description
 ---- | -----------
 204 No Content | The API has modified the translation specified
+200 OK | The API acknowledged the request, but there wasn't anything to update
 400 Bad Request | You didn't include any properties in the JSON body
 404 Not Found | A translation does not exist with the specified ID
 403 Forbidden | You attempted to modify a translation you don't have permission for
