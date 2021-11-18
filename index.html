@@ -301,8 +301,8 @@
     <div class="toc-wrapper">
       <img src="images/logo-27bd71f5.png" class="logo" alt="" />
         <div class="lang-selector">
-              <a href="#" data-language-name="javascript">javascript</a>
-              <a href="#" data-language-name="csharp">csharp</a>
+              <a href="#" data-language-name="javascript">Javascript</a>
+              <a href="#" data-language-name="csharp">C#</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -312,6 +312,9 @@
           <li>
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
               <ul class="toc-list-h2">
+                  <li>
+                    <a href="#attribution" class="toc-h2 toc-link" data-title="Attribution">Attribution</a>
+                  </li>
                   <li>
                     <a href="#examples" class="toc-h2 toc-link" data-title="Examples">Examples</a>
                   </li>
@@ -330,15 +333,35 @@
           </li>
           <li>
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#permissions-and-roles" class="toc-h2 toc-link" data-title="Permissions and roles">Permissions and roles</a>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="#translations" class="toc-h1 toc-link" data-title="Translations">Translations</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#overview" class="toc-h2 toc-link" data-title="Overview">Overview</a>
+                  </li>
+                  <li>
                     <a href="#get-all-translations-on-a-video" class="toc-h2 toc-link" data-title="Get All Translations on a Video">Get All Translations on a Video</a>
                   </li>
                   <li>
                     <a href="#receive-new-translations-on-a-video" class="toc-h2 toc-link" data-title="Receive New Translations on a Video">Receive New Translations on a Video</a>
+                  </li>
+                  <li>
+                    <a href="#add-translation-to-video" class="toc-h2 toc-link" data-title="Add Translation to Video">Add Translation to Video</a>
+                  </li>
+                  <li>
+                    <a href="#update-a-translation" class="toc-h2 toc-link" data-title="Update a Translation">Update a Translation</a>
+                  </li>
+                  <li>
+                    <a href="#delete-a-translation" class="toc-h2 toc-link" data-title="Delete a Translation">Delete a Translation</a>
+                  </li>
+                  <li>
+                    <a href="#import-translations-for-video-from-subtitle-file" class="toc-h2 toc-link" data-title="Import Translations for Video from Subtitle File">Import Translations for Video from Subtitle File</a>
                   </li>
               </ul>
           </li>
@@ -346,12 +369,24 @@
             <a href="#translators-2" class="toc-h1 toc-link" data-title="Translators">Translators</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#overview-2" class="toc-h2 toc-link" data-title="Overview">Overview</a>
+                  </li>
+                  <li>
+                    <a href="#account-types" class="toc-h2 toc-link" data-title="Account Types">Account Types</a>
+                  </li>
+                  <li>
                     <a href="#get-all-registered-translators" class="toc-h2 toc-link" data-title="Get All Registered Translators">Get All Registered Translators</a>
                   </li>
                   <li>
                     <a href="#get-translator-by-id" class="toc-h2 toc-link" data-title="Get Translator by ID">Get Translator by ID</a>
                   </li>
+                  <li>
+                    <a href="#register-as-translator" class="toc-h2 toc-link" data-title="Register as Translator">Register as Translator</a>
+                  </li>
               </ul>
+          </li>
+          <li>
+            <a href="#languages-2" class="toc-h1 toc-link" data-title="Languages">Languages</a>
           </li>
           <li>
             <a href="#contact-us" class="toc-h1 toc-link" data-title="Contact us">Contact us</a>
@@ -370,14 +405,15 @@ updates (via <a href="https://developer.mozilla.org/en-US/docs/Web/API/Server-se
 new translations, as they are added.</p>
 
 <p>The primary data served by the API is publicly available, however we ask that you don&#39;t attempt to scrape all our data,
-if you&#39;d like a datadump of our translations, please <a href="/#contact">get in touch</a>.</p>
+if you&#39;d like a datadump of our translations, please <a href="#contact-us">get in touch</a>.</p>
+<h2 id='attribution'>Attribution</h2>
+<p>TODO</p>
 <h2 id='examples'>Examples</h2>
 <p>We&#39;ve written example code for the primary scenario of each endpoint, available in both Javascript and C#.</p>
 
 <p>The examples have been written and tested with specific environments in mind; Javascript in the browser (though most
-should work in NodeJS with no additional packages) and C# on .NET Core 3.1
-(using <a href="https://www.nuget.org/packages/RestSharp">RestSharp</a>, and the (currently internal) <code>LiveTL.Common</code> class
-library).</p>
+should work in NodeJS with no additional packages) and C# on .NET Core 3.1 (using the (currently
+internal) <code>LiveTL.Common</code> class library).</p>
 
 <p>If an endpoint requires specific additional packages, it will be explicitly mentioned in a comment of the example code
 for that endpoint.</p>
@@ -392,7 +428,7 @@ Note that you are not expected to bundle this data into the package or webpage y
 have each instance of the client send a request to the server on initialization, and then store it on their machine.</p>
 <h3 id='languages'>Languages</h3>
 <p>Clients should maintain a local list of the <a href="https://en.wikipedia.org/wiki/ISO_639-1">ISO 639-1 Language Codes</a>
-supported by the API. This list should be <a href="/#languages">obtained</a> <strong><em>once</em></strong> by the client and stored on the user&#39;s
+supported by the API. This list should be <a href="#languages">obtained</a> <strong><em>once</em></strong> by the client and stored on the user&#39;s
 machine.</p>
 
 <p>The only time a client should request this list again, is if for some reason the API sends a language code that the
@@ -400,9 +436,15 @@ client does not recognize from it&#39;s internal list. However, this should almo
 pre-populated with nearly every language code, and the data is not expected to ever be updated.</p>
 <h3 id='translators'>Translators</h3>
 <p>Clients should store a local list of translators the client has seen. An easy (but not necessary) way to pre-populate
-this list is to <a href="/#get-all-registered-translators">get all registered translators</a>. Clients should send a request
-to <a href="/#get-translator-by-id">get translator information</a> when they encounter a translator ID that is not in their local
+this list is to <a href="#get-all-registered-translators">get all registered translators</a>. Clients should send a request
+to <a href="#get-translator-by-id">get translator information</a> when they encounter a translator ID that is not in their local
 list.</p>
+
+<p>This list can be updated periodically so that any newly registered translators, or changes made to translator profiles
+are synchronized to the client. This update should be done infrequently if you&#39;re using the
+<a href="#get-all-registered-translators">get all registered translators</a> endpoint, preferably no more than once per day, but
+updating individual translators as you require their information can be done much more frequently, and thus should be
+the primary methods clients should use.</p>
 <h1 id='authentication'>Authentication</h1>
 <blockquote>
 <p>Raw HTTP Header</p>
@@ -413,35 +455,120 @@ list.</p>
 <p>Language-specific examples</p>
 </blockquote>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://api.livetl.app/some/endpoint/with/auth</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span>
-  <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
-    <span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer {your_access_token}</span><span class="dl">"</span>
-  <span class="p">}</span>
+    <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+        <span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer {your_access_token}</span><span class="dl">"</span>
+    <span class="p">}</span>
 <span class="p">});</span>
-</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="n">RestClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RestClient</span><span class="p">(</span><span class="s">"https://api.livetl.app/some/endpoint/with/auth"</span><span class="p">);</span>
-<span class="n">RestRequest</span> <span class="n">request</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RestRequest</span><span class="p">(</span><span class="n">Method</span><span class="p">.</span><span class="n">GET</span><span class="p">);</span>
-<span class="n">request</span><span class="p">.</span><span class="nf">AddHeader</span><span class="p">(</span><span class="s">"Authorization"</span><span class="p">,</span> <span class="s">"Bearer {your_access_token}"</span><span class="p">);</span>
-<span class="n">IRestResponse</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">client</span><span class="p">.</span><span class="nf">ExecuteAsync</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
+</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">HttpClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">();</span>
+<span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">"Bearer"</span><span class="p">,</span> <span class="p">{</span><span class="n">your_access_token</span><span class="p">});</span>
+<span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">_client</span><span class="p">.</span><span class="nf">GetAsync</span><span class="p">(</span><span class="s">"https://api.livetl.app/some/endpoint/with/auth"</span><span class="p">);</span>
 </code></pre></div>
 <aside class="notice">
 If you're an existing third party service wishing to create an integration with full access to the API, you can request 
 access to our Auth0 service to allow users to authenticate within your application by <a href="/#contact-us">contacting us</a>.
 </aside>
 
+<p>Not every endpoint requires authentication, most notably the get translations and get translators endpoints. Endpoints
+that do require authentication will indicate so in their description. When requesting without a valid authorization
+token present or the user does not have the required permission node for the endpoint, the API will return a
+<code>403 - Forbidden</code> status.</p>
+
 <p>You&#39;re able to authenticate with the API using the same user accounts as used on <a href="https://livetl.app">our website</a>, and
 uses <a href="https://jwt.io/introduction/">JSON Web Tokens</a> to authenticate with the API. You can obtain the JWT Access Token
 required to authenticate with the API by using an <a href="https://auth0.com/docs/libraries">Auth0 Library</a> to sign in to your
 LiveTL account.</p>
+<h2 id='permissions-and-roles'>Permissions and roles</h2>
+<p>Most endpoints are restricted behind different permissions (which are assigned to roles, which are assigned to users) so
+that only authorized users can access them. If an endpoint requires a specific permission, it will be explicitly stated
+in the description of that endpoint.</p>
 
-<p>Not every endpoint requires authentication, most notably the translations and translators endpoints, however there are
-several different endpoints that are restricted behind different permissions so that only authorized users can access
-them. If an endpoint requires authentication/authorization, it will be explicitly stated in the description of that
-endpoint.</p>
-<h1 id='translations'>Translations</h1><h2 id='get-all-translations-on-a-video'>Get All Translations on a Video</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://api.livetl.app/translations/example/en</span><span class="dl">"</span><span class="p">);</span>
+<p>The following table describes each permission, along with what role has what permissions. The list will likely be
+updated and expanded upon as the API continues development.</p>
+
+<table><thead>
+<tr>
+<th>Permission</th>
+<th>Roles</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>create:translations</code></td>
+<td>Registered, Verified</td>
+<td>Allows the user to create new translations on videos</td>
+</tr>
+<tr>
+<td><code>modify:translations</code></td>
+<td>Registered, Verified</td>
+<td>Allows the user to modify (change or delete) their own translations</td>
+</tr>
+<tr>
+<td><code>write:translations</code></td>
+<td>Verified</td>
+<td>Allows the user to modify (change or delete) translations from any translator</td>
+</tr>
+</tbody></table>
+<h1 id='translations'>Translations</h1><h2 id='overview'>Overview</h2>
+<p>The translation object sent by the API contains the minimum amount of information needed, and the client is expected to
+look up (preferably using it&#39;s local cache) information about the translator and language.</p>
+
+<p>Note that translations contain both a start and an end time. This is so that translations can be exported into standard
+subtitle formats (such as <a href="https://en.wikipedia.org/wiki/SubRip">SRT</a> or
+<a href="https://en.wikipedia.org/wiki/SubStation_Alpha">SSA/ASS</a>) or be displayed over a video player, should clients choose to
+implement that. However, translations that were added while a stream was live will not include an end time, and clients
+requiring one to be present should ensure to use a default value of some sort. When adding (or updating) translations
+after a stream has ended, clients should ensure that a user enters an end time.</p>
+
+<p>The translation object contains the following properties:</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Id</td>
+<td>64-bit integer</td>
+<td>The unique identifier for the translation</td>
+</tr>
+<tr>
+<td>VideoId</td>
+<td>string</td>
+<td>The ID of the YouTube video this translation is for</td>
+</tr>
+<tr>
+<td>TranslatorId</td>
+<td>string</td>
+<td>The ID of the translator who submitted the translation</td>
+</tr>
+<tr>
+<td>LanguageCode</td>
+<td>string</td>
+<td>The <a href="https://en.wikipedia.org/wiki/ISO_639-1">ISO 639-1 language code</a> of the language being translated to</td>
+</tr>
+<tr>
+<td>TranslatedText</td>
+<td>string</td>
+<td>The actual text content of the translation</td>
+</tr>
+<tr>
+<td>Start</td>
+<td>32-bit integer</td>
+<td>The timestamp (in milliseconds) the translation starts at</td>
+</tr>
+<tr>
+<td>End</td>
+<td>32-bit integer</td>
+<td>The timestamp (in milliseconds) the translation starts at</td>
+</tr>
+</tbody></table>
+<h2 id='get-all-translations-on-a-video'>Get All Translations on a Video</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://api.livetl.app/translations/example/en</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">let</span> <span class="nx">translations</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="n">RestClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RestClient</span><span class="p">(</span><span class="s">"https://api.livetl.app/translations/example/en"</span><span class="p">);</span>
-<span class="n">RestRequest</span> <span class="n">request</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RestRequest</span><span class="p">(</span><span class="n">Method</span><span class="p">.</span><span class="n">GET</span><span class="p">);</span>
-<span class="n">IRestResponse</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">client</span><span class="p">.</span><span class="nf">ExecuteAsync</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
-<span class="n">List</span><span class="p">&lt;</span><span class="n">TranslationModel</span><span class="p">&gt;</span> <span class="n">translations</span> <span class="p">=</span> <span class="n">JsonSerializer</span><span class="p">.</span><span class="n">Deserialize</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">TranslationModel</span><span class="p">&gt;&gt;(</span><span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">,</span> <span class="k">new</span> <span class="n">JsonSerializerOptions</span> <span class="p">{</span>
+</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">HttpClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">();</span>
+<span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">client</span><span class="p">.</span><span class="nf">GetAsync</span><span class="p">(</span><span class="s">"https://api.livetl.app/translations/example/en"</span><span class="p">);</span>
+<span class="n">List</span><span class="p">&lt;</span><span class="n">TranslationModel</span><span class="p">&gt;</span> <span class="n">translations</span> <span class="p">=</span> <span class="n">JsonSerializer</span><span class="p">.</span><span class="n">Deserialize</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">TranslationModel</span><span class="p">&gt;&gt;(</span><span class="k">await</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="nf">ReadAsStringAsync</span><span class="p">(),</span> <span class="k">new</span> <span class="n">JsonSerializerOptions</span> <span class="p">{</span>
     <span class="n">PropertyNameCaseInsensitive</span> <span class="p">=</span> <span class="k">true</span>
 <span class="p">});</span>
 </code></pre></div>
@@ -471,8 +598,8 @@ endpoint.</p>
 </span></code></pre></div>
 <p>Returns all translations (with the specified filter, if any) for a specific video.</p>
 
-<p>See the <a href="/#receive-new-translations-on-a-video">SSE endpoint</a> for the recommend endpoint to receive translations during
-a live stream.</p>
+<p>See the <a href="#receive-new-translations-on-a-video">SSE endpoint</a> for the recommend endpoint to receive translations during a
+live stream.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>GET https://api.livetl.app/translations/{video_id}/{language_code}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
@@ -503,8 +630,8 @@ a live stream.</p>
 <tr>
 <td>since</td>
 <td><code>-1</code></td>
-<td>Only returns translations created after this timestamp (in ms from start of stream)</td>
-<td>None</td>
+<td>Only returns translations created after this timestamp (in milliseconds from start of stream)</td>
+<td>32-bit integer</td>
 </tr>
 <tr>
 <td>require</td>
@@ -544,9 +671,9 @@ a live stream.</p>
 </tr>
 </tbody></table>
 <h2 id='receive-new-translations-on-a-video'>Receive New Translations on a Video</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">// Requires the `eventsource` npm package when using NodeJS</span>
-<span class="kd">let</span> <span class="nx">source</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventSource</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://api.livetl.app/translations/stream?videoId=testid</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">source</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventSource</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://api.livetl.app/notifications/translations?videoId=example&amp;languageCode=en</span><span class="dl">"</span><span class="p">);</span>
 <span class="nx">source</span><span class="p">.</span><span class="nx">onmessage</span> <span class="o">=</span> <span class="nx">msg</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="c1">// The C# example has not yet been written, as .NET Core does not include a native way to consume SSE</span>
 <span class="c1">// When the example is written, it will likely use the `LaunchDarkly.EventSource` nuget package </span>
@@ -564,15 +691,15 @@ a live stream.</p>
   </span><span class="nl">"end"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">  
 </span></code></pre></div>
-<p>A <a href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events">Server Sent Events (SSE)</a> endpoint to allow
-clients to use an <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventSource">EventSource</a> receive new translations
-for a language on a requested video immediately when they are created.</p>
+<p>A <a href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events">Server Sent Events (SSE)</a> endpoint that allows
+clients to use an <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventSource">EventSource</a> to receive new
+translations for a language on a requested video, immediately when they are created.</p>
 
 <aside class="notice">
 This is the recommended way for clients to receive translations during a live stream.
 </aside>
 <h3 id='event-source-url'>Event Source URL</h3>
-<p><code>https://api.livetl.app/translations/stream?videoId={video_id}?languageCode={language_code}</code></p>
+<p><code>https://api.livetl.app/notifications/translations?videoId={video_id}&amp;languageCode={language_code}</code></p>
 <h3 id='url-parameters-2'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -617,17 +744,696 @@ This is the recommended way for clients to receive translations during a live st
 <aside class="warning">
 This endpoint does not provide any method for server-side filtering, as such if you require filtering, it <i>must</i> be done client side.
 </aside>
-<h1 id='translators-2'>Translators</h1><h2 id='get-all-registered-translators'>Get All Registered Translators</h2><h2 id='get-translator-by-id'>Get Translator by ID</h2><h1 id='contact-us'>Contact us</h1>
+<h2 id='add-translation-to-video'>Add Translation to Video</h2>
+<blockquote>
+<p>This endpoint requires <a href="#authentication">Authorization</a> with the <code>create:translations</code> permission</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://api.livetl.app/translations/example</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">method</span><span class="p">:</span> <span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+        <span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer {your_access_token}</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+    <span class="p">},</span>
+    <span class="na">body</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+        <span class="dl">"</span><span class="s2">translatedText</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">This is an example translation</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">start</span><span class="dl">"</span><span class="p">:</span> <span class="mi">150</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">languageCode</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">en</span><span class="dl">"</span>
+    <span class="p">})</span>
+<span class="p">});</span>
+<span class="kd">let</span> <span class="nx">success</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">201</span><span class="p">;</span>
+</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">HttpClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">();</span>
+<span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">"Bearer"</span><span class="p">,</span> <span class="p">{</span><span class="n">your_access_token</span><span class="p">});</span>
+<span class="n">StringContent</span> <span class="n">content</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">StringContent</span><span class="p">(</span><span class="n">JsonSerializer</span><span class="p">.</span><span class="nf">Serialize</span><span class="p">(</span><span class="k">new</span> <span class="n">TranslationModel</span> <span class="p">{</span>
+    <span class="n">TranslatedText</span> <span class="p">=</span> <span class="s">"This is an example translation"</span><span class="p">,</span>
+    <span class="n">Start</span> <span class="p">=</span> <span class="m">150</span><span class="p">,</span>
+    <span class="n">LanguageCode</span> <span class="p">=</span> <span class="s">"en"</span>
+<span class="p">}),</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">"application/json"</span><span class="p">);</span>
+<span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">client</span><span class="p">.</span><span class="nf">PostAsync</span><span class="p">(</span><span class="s">"https://api.livetl.app/translations/example"</span><span class="p">,</span> <span class="n">content</span><span class="p">);</span>
+<span class="kt">bool</span> <span class="n">success</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">IsSuccessStatusCode</span><span class="p">;</span>
+</code></pre></div>
+<p>Add a new translation to a video. The API expects a valid (see &#39;Request Body&#39; section below) JSON object in the body of
+the request. Property names are not case sensitive.</p>
+
+<p>This endpoint requires <a href="#authentication">Authorization</a> with the <code>create:translations</code> permission.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>POST https://api.livetl.app/translations/{video_id}</code></p>
+<h3 id='url-parameters-3'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>video_id</td>
+<td>The YouTube Video ID (ie <code>dQw4w9WgXcQ</code> from <code>https://www.youtube.com/watch?v=dQw4w9WgXcQ</code>) to add the translation to</td>
+</tr>
+</tbody></table>
+<h3 id='request-body'>Request Body</h3>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Required</th>
+<th>Description</th>
+<th>Constraints</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>LanguageCode</td>
+<td>Yes</td>
+<td>The language the translation is for</td>
+<td>Valid <a href="https://en.wikipedia.org/wiki/ISO_639-1">ISO 639-1 language code</a></td>
+</tr>
+<tr>
+<td>TranslatedText</td>
+<td>Yes</td>
+<td>The translation itself</td>
+<td>Non-empty string</td>
+</tr>
+<tr>
+<td>Start</td>
+<td>Yes</td>
+<td>The timestamp (in milliseconds) to display the translation at</td>
+<td>32-bit integer, greater than or equal to 0</td>
+</tr>
+<tr>
+<td>End</td>
+<td>No</td>
+<td>The timestamp (in milliseconds) to stop displaying the translation at. Useful for clients that display translations as a caption on the video, or for exporting to a subtitle format (such as SRT or ASS)</td>
+<td>32-bit integer, greater than <code>Start</code></td>
+</tr>
+</tbody></table>
+<h3 id='possible-http-response-status-codes-2'>Possible HTTP Response Status Codes</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>201 Created</td>
+<td>The API has added the translation to the database (and cache, if applicable)</td>
+</tr>
+<tr>
+<td>400 Bad Request</td>
+<td>You didn&#39;t provide a valid YouTube Video ID</td>
+</tr>
+<tr>
+<td>400 Bad Request</td>
+<td>You didn&#39;t include all the required properties in the JSON body</td>
+</tr>
+<tr>
+<td>400 Bad Request</td>
+<td>You provided an unknown language code, or invalid start/end timestamp</td>
+</tr>
+<tr>
+<td>400 Bad Request</td>
+<td>The translator who authorized the request has not been registered in the database as a translator, but still somehow has the permission a registered translator does (this is likely a bug, please <a href="#contact-us">contact us</a> to report it)</td>
+</tr>
+<tr>
+<td>500 Server Error</td>
+<td>The API encountered an error when adding the translation to the database</td>
+</tr>
+</tbody></table>
+<h2 id='update-a-translation'>Update a Translation</h2>
+<blockquote>
+<p>This endpoint requires <a href="#authentication">Authorization</a> with the <code>modify:translations</code> or <code>write:translations</code> permissions</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://api.livetl.app/translations/1</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">method</span><span class="p">:</span> <span class="dl">"</span><span class="s2">PUT</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+        <span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer {your_access_token}</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+    <span class="p">},</span>
+    <span class="na">body</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+        <span class="dl">"</span><span class="s2">translatedText</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">This is a modification to an existing translation</span><span class="dl">"</span>
+    <span class="p">})</span>
+<span class="p">});</span>
+<span class="kd">let</span> <span class="nx">modifiedOrNotNeccessary</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">204</span> <span class="o">||</span> <span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">200</span><span class="p">;</span>
+</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">HttpClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">();</span>
+<span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">"Bearer"</span><span class="p">,</span> <span class="p">{</span><span class="n">your_access_token</span><span class="p">});</span>
+<span class="n">StringContent</span> <span class="n">content</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">StringContent</span><span class="p">(</span><span class="n">JsonSerializer</span><span class="p">.</span><span class="nf">Serialize</span><span class="p">(</span><span class="k">new</span> <span class="n">TranslationModel</span> <span class="p">{</span>
+    <span class="n">TranslatedText</span> <span class="p">=</span> <span class="s">"This is a modification to an existing translation"</span>
+<span class="p">}),</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">"application/json"</span><span class="p">);</span>
+<span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">client</span><span class="p">.</span><span class="nf">PutAsync</span><span class="p">(</span><span class="s">"https://api.livetl.app/translations/1"</span><span class="p">);</span>
+<span class="kt">bool</span> <span class="n">modifiedOrNotNeccessary</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">StatusCode</span> <span class="p">==</span> <span class="n">HttpStatusCode</span><span class="p">.</span><span class="n">NoContent</span> <span class="p">||</span> <span class="n">resposne</span><span class="p">.</span><span class="n">StatusCode</span> <span class="p">==</span> <span class="n">HttpStatusCode</span><span class="p">.</span><span class="n">OK</span><span class="p">;</span>
+</code></pre></div>
+<p>Modifies an existing translation. The API expects a valid (see &#39;Request Body&#39; section below) JSON object in the body of
+the request. Property names are not case sensitive.</p>
+
+<p>The cache is not immediately updated with modifications made using this endpoint, and may take up to 1 hour to refresh.</p>
+
+<p>This endpoint requires <a href="#authentication">Authorization</a> with the <code>modify:translations</code> or <code>write:translations</code>
+permissions. Users with <code>write:translations</code> can modify any translation, users with <code>modify:translations</code> can only
+modify their own.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>PUT https://api.livetl.app/translations/{translation_id}</code></p>
+<h3 id='url-parameters-4'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>translation_id</td>
+<td>The ID of the translation to modify</td>
+</tr>
+</tbody></table>
+<h3 id='request-body-2'>Request Body</h3>
+<p>Note that while all properties are optional, at least one property must be set. If other translation properties are
+included in the object, they will be ignored and return <code>200 - No modifications are required</code>.</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Required</th>
+<th>Description</th>
+<th>Constraints</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>TranslatedText</td>
+<td>No</td>
+<td>The new translation text</td>
+<td>Non-empty string</td>
+</tr>
+<tr>
+<td>Start</td>
+<td>No</td>
+<td>The new timestamp (in milliseconds) to display the translation at</td>
+<td>32-bit integer, greater than or equal to 0</td>
+</tr>
+<tr>
+<td>End</td>
+<td>No</td>
+<td>The new timestamp (in milliseconds) to stop displaying the translation at</td>
+<td>32-bit integer, greater than <code>Start</code></td>
+</tr>
+</tbody></table>
+<h3 id='possible-http-response-status-codes-3'>Possible HTTP Response Status Codes</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>204 No Content</td>
+<td>The API has modified the translation specified</td>
+</tr>
+<tr>
+<td>200 OK</td>
+<td>The API acknowledged the request, but there wasn&#39;t anything to update</td>
+</tr>
+<tr>
+<td>400 Bad Request</td>
+<td>You didn&#39;t include any properties in the JSON body</td>
+</tr>
+<tr>
+<td>404 Not Found</td>
+<td>A translation does not exist with the specified ID</td>
+</tr>
+<tr>
+<td>403 Forbidden</td>
+<td>You attempted to modify a translation you don&#39;t have permission for</td>
+</tr>
+<tr>
+<td>500 Server Error</td>
+<td>The API encountered an error when updating the translation in the database</td>
+</tr>
+</tbody></table>
+<h2 id='delete-a-translation'>Delete a Translation</h2>
+<blockquote>
+<p>This endpoint requires <a href="#authentication">Authorization</a> with the <code>modify:translations</code> or <code>write:translations</code> permissions</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://api.livetl.app/translations/1</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">method</span><span class="p">:</span> <span class="dl">"</span><span class="s2">DELETE</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+        <span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer {your_access_token}</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+    <span class="p">},</span>
+    <span class="na">body</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Innaccurate/troll translation</span><span class="dl">"</span>
+<span class="p">});</span>
+<span class="kd">let</span> <span class="nx">deletedOrRequested</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">204</span> <span class="o">||</span> <span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">202</span><span class="p">;</span>
+</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">HttpClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">();</span>
+<span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">"Bearer"</span><span class="p">,</span> <span class="p">{</span><span class="n">your_access_token</span><span class="p">});</span>
+<span class="n">HttpRequestMessage</span> <span class="n">request</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpRequestMessage</span><span class="p">(</span><span class="n">HttpMethod</span><span class="p">.</span><span class="n">Delete</span><span class="p">,</span> <span class="s">"https://api.livetl.app/translations/1"</span><span class="p">);</span>
+<span class="n">request</span><span class="p">.</span><span class="n">Content</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">StringContent</span><span class="p">(</span><span class="s">"Innaccurate/troll translation"</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">"text/plain"</span><span class="p">);</span>
+<span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">client</span><span class="p">.</span><span class="nf">SendAsync</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
+<span class="kt">bool</span> <span class="n">deletedOrRequested</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">StatusCode</span> <span class="p">==</span> <span class="n">HttpStatusCode</span><span class="p">.</span><span class="n">NoContent</span> <span class="p">||</span> <span class="n">resposne</span><span class="p">.</span><span class="n">StatusCode</span> <span class="p">==</span> <span class="n">HttpStatusCode</span><span class="p">.</span><span class="n">Accepted</span><span class="p">;</span>
+</code></pre></div>
+<p>Deletes an existing translation. The API expects a plain-text string in the body of the request for the reason.</p>
+
+<p>The cache is not immediately updated with deletions made using this endpoint, and may take up to 1 hour to refresh.</p>
+
+<p>This endpoint requires <a href="#authentication">Authorization</a> with the <code>modify:translations</code> or <code>write:translations</code>
+permissions. Users with <code>write:translations</code> can delete any translation, users with <code>modify:translations</code> can only
+delete their own, other translations will have a delete request submitted for review by verified translators.</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>DELETE https://api.livetl.app/translations/{translation_id}</code></p>
+<h3 id='url-parameters-5'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>translation_id</td>
+<td>The ID of the translation to delete</td>
+</tr>
+</tbody></table>
+<h3 id='request-body-3'>Request Body</h3>
+<p>A string containing the reason why you are deleting the translation.</p>
+<h3 id='possible-http-response-status-codes-4'>Possible HTTP Response Status Codes</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>204 No Content</td>
+<td>The API has deleted the translation specified</td>
+</tr>
+<tr>
+<td>202 Accepted</td>
+<td>The API has created a deletion request for the translation specified</td>
+</tr>
+<tr>
+<td>400 Bad Request</td>
+<td>You didn&#39;t include a deletion reason</td>
+</tr>
+<tr>
+<td>404 Not Found</td>
+<td>A translation does not exist with the specified ID</td>
+</tr>
+<tr>
+<td>500 Server Error</td>
+<td>The API encountered an error when deleting the translation from the database</td>
+</tr>
+<tr>
+<td>500 Server Error</td>
+<td>The API encountered an error when creating the deletion request for the translation in the database</td>
+</tr>
+</tbody></table>
+<h2 id='import-translations-for-video-from-subtitle-file'>Import Translations for Video from Subtitle File</h2>
+<blockquote>
+<p>This endpoint requires <a href="#authentication">Authorization</a> with the <code>create:translations</code> permission</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">// this example is written using an old nodejs fs method, which isn't exactly the modern standard for file reading</span>
+<span class="c1">// however it's only intended to be a very basic example method to obtain the data to send</span>
+<span class="c1">// you may have have different requirements for your application, and should use whatever fits your needs</span>
+<span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="dl">"</span><span class="s2">/path/to/subtitle/file</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">utf8</span><span class="dl">"</span><span class="p">,</span> <span class="k">async</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">fileContents</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">;</span>
+
+    <span class="kd">let</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://api.livetl.app/translations/example/en/subtitles</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span>
+        <span class="na">method</span><span class="p">:</span> <span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+            <span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer {your_access_token}</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">text/plain</span><span class="dl">"</span>
+        <span class="p">},</span>
+        <span class="na">body</span><span class="p">:</span> <span class="nx">fileContents</span>
+    <span class="p">});</span>
+    <span class="kd">let</span> <span class="nx">success</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">200</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">HttpClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">();</span>
+<span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">"Bearer"</span><span class="p">,</span> <span class="p">{</span><span class="n">your_access_token</span><span class="p">});</span>
+<span class="k">using</span> <span class="nn">StreamReader</span> <span class="n">file</span> <span class="p">=</span> <span class="n">File</span><span class="p">.</span><span class="nf">OpenText</span><span class="p">(</span><span class="s">"/path/to/subtitle/file"</span><span class="p">);</span>
+<span class="n">StringContent</span> <span class="n">content</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">StringContent</span><span class="p">(</span><span class="k">await</span> <span class="n">file</span><span class="p">.</span><span class="nf">ReadToEndAsync</span><span class="p">(),</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">"text/plain"</span><span class="p">);</span>
+<span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">client</span><span class="p">.</span><span class="nf">PostAsync</span><span class="p">(</span><span class="s">"https://api.livetl.app/translations/example/en/subtitles"</span><span class="p">,</span> <span class="n">content</span><span class="p">);</span>
+<span class="kt">bool</span> <span class="n">success</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">IsSuccessStatusCode</span><span class="p">;</span>
+</code></pre></div>
+<p>Allows for bulk addition of translations for a video. The API expects a valid subtitle file (see &#39;Supported Formats&#39;
+section below) in plain-text in the body of the request.</p>
+
+<p>This endpoint requires <a href="#authentication">Authorization</a> with the <code>create:translations</code> permission</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>POST https://api.livetl.app/translations/{video_id}/{language_code}/subtitles</code></p>
+<h3 id='url-parameters-6'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>video_id</td>
+<td>The YouTube Video ID (ie <code>dQw4w9WgXcQ</code> from <code>https://www.youtube.com/watch?v=dQw4w9WgXcQ</code>) to import translations for</td>
+</tr>
+<tr>
+<td>language_code</td>
+<td>The <a href="https://en.wikipedia.org/wiki/ISO_639-1">ISO 639-1 language code</a> of the language the translations should be imported to</td>
+</tr>
+</tbody></table>
+<h3 id='supported-formats'>Supported Formats</h3>
+<p>The API currently supports parsing <a href="https://en.wikipedia.org/wiki/SubRip">SubRip</a> and
+<a href="https://en.wikipedia.org/wiki/SubStation_Alpha">SubStation Alpha</a> files, though more may be added later.</p>
+
+<aside class="warning">
+Note that the only information the API parses from these formats is the start and end timecodes, and the subtitle text content. This
+means that any styles or typesetting present in the file are completely discarded. 
+</aside>
+<h3 id='possible-http-response-status-codes-5'>Possible HTTP Response Status Codes</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200 OK</td>
+<td>The API imported the subtitles into translations in the specified language for the specified video</td>
+</tr>
+<tr>
+<td>400 Bad Request</td>
+<td>You didn&#39;t provide a valid YouTube Video ID</td>
+</tr>
+<tr>
+<td>400 Bad Request</td>
+<td>You provided an unknown language code</td>
+</tr>
+<tr>
+<td>400 Bad Request</td>
+<td>The translator who authorized the request has not been registered in the database as a translator, but still somehow has the permission a registered translator does (this is likely a bug, please contact us to report it)</td>
+</tr>
+<tr>
+<td>400 Bad Request</td>
+<td>The API was unable to parse any translations from the request body</td>
+</tr>
+<tr>
+<td>500 Server Error</td>
+<td>The API encountered an error when importing the translations to the the database</td>
+</tr>
+</tbody></table>
+<h1 id='translators-2'>Translators</h1><h2 id='overview-2'>Overview</h2>
+<p>The translator object sent by the API contains information about a translator for displaying alongside translations in a
+client. The API only responds with information about users who have registered as a translator, and not normal users who
+have only signed up for a LiveTL account.</p>
+
+<p>Please be sure to read about the <a href="#translators">local caching expectations</a> before implementing usage of these endpoints
+into your client.</p>
+
+<p>The translator object contains the following properties:</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>UserId</td>
+<td>string</td>
+<td>The unique identifier (assigned by Auth0) for the translator</td>
+</tr>
+<tr>
+<td>DisplayName</td>
+<td>string</td>
+<td>The name the translator has set to be displayed by clients</td>
+</tr>
+<tr>
+<td>ProfilePictureUrl</td>
+<td>string</td>
+<td>The URL where the users profile picture (if set) is located at</td>
+</tr>
+<tr>
+<td>Type</td>
+<td>string</td>
+<td>The <a href="#account-types">translator account type</a> of the translator</td>
+</tr>
+<tr>
+<td>Languages</td>
+<td>Language[]</td>
+<td>An array of <a href="#languages-2">language objects</a> the translator is registered under</td>
+</tr>
+</tbody></table>
+<h2 id='account-types'>Account Types</h2>
+<p>Currently there are only two implemented account types, Registered and Verified. Additional types may be added at some
+point in the future, but none are currently planned.</p>
+
+<p>Registered translators are any user who has signed up for a LiveTL account and registered that account as a translator.
+LiveTL has no involvement in who can register as a translator, but reserves the right to &#39;ban&#39; translators who
+consistently and intentionally submit low quality or inaccurate translations, as these are potentially harmful to both
+streamers and the community.</p>
+
+<p>Verified translators are registered translators who have submitted an application to LiveTL with information that
+verifies them as a professional translator, or is recognized and approved by a well-known community official (ie modded
+by a streamer they translate for). These translators are typically considered to have higher quality or more accurate
+translations than normal registered translators, and as such clients developed by the LiveTL team will differentiate
+between the two. Third party clients are not required or expected to differentiate them.</p>
+<h2 id='get-all-registered-translators'>Get All Registered Translators</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://api.livetl.app/translators/registered</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">translators</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="n">RestClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RestClient</span><span class="p">(</span><span class="s">"https://api.livetl.app/translators/registered"</span><span class="p">);</span>
+<span class="n">RestRequest</span> <span class="n">request</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RestRequest</span><span class="p">(</span><span class="n">Method</span><span class="p">.</span><span class="n">GET</span><span class="p">);</span>
+<span class="n">IRestResponse</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">client</span><span class="p">.</span><span class="nf">ExecuteAsync</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
+<span class="n">List</span><span class="p">&lt;</span><span class="n">Translator</span><span class="p">&gt;</span> <span class="n">translators</span> <span class="p">=</span> <span class="n">JsonSerializer</span><span class="p">.</span><span class="n">Deserialize</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">Translator</span><span class="p">&gt;&gt;(</span><span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">,</span> <span class="k">new</span> <span class="n">JsonSerializerOptions</span> <span class="p">{</span>
+    <span class="n">PropertyNameCaseInsensitive</span> <span class="p">=</span> <span class="k">true</span>
+<span class="p">});</span>
+</code></pre></div>
+<blockquote>
+<p>The endpoint returns a list of JSON objects like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"languages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"English"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"nativeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"English"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ja"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Japanese"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"nativeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"日本語"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Registered"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"userID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"auth0|60c195aa5d89a500699c01cc"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"grumpybear4257"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"profilePictureUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s.gravatar.com/avatar/6aaef03e46b8344a9178a565a4ef70e4?s=480&amp;r=pg&amp;d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fgr.png"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"languages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"English"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"nativeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"English"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ja"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Japanese"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"nativeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"日本語"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Verified"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"userID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"auth0|60cafad9612d820070a6c388"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kamishirotaishi"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"profilePictureUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s.gravatar.com/avatar/50202936063379c31b0b03084eb48067?s=480&amp;r=pg&amp;d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fka.png"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p>Returns all registered translators (including verified).</p>
+<h3 id='http-request-6'>HTTP Request</h3>
+<p><code>GET https://api.livetl.app/translators/registered</code></p>
+<h3 id='possible-http-response-status-codes-6'>Possible HTTP Response Status Codes</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200 OK</td>
+<td>The API found and returned all translators who have registered</td>
+</tr>
+<tr>
+<td>404 Not Found</td>
+<td>There are no translators who have registered</td>
+</tr>
+</tbody></table>
+<h2 id='get-translator-by-id'>Get Translator by ID</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://api.livetl.app/translators/auth0|60cafad9612d820070a6c388</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">translator</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="n">RestClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RestClient</span><span class="p">(</span><span class="s">"https://api.livetl.app/translators/auth0|60cafad9612d820070a6c388"</span><span class="p">);</span>
+<span class="n">RestRequest</span> <span class="n">request</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RestRequest</span><span class="p">(</span><span class="n">Method</span><span class="p">.</span><span class="n">GET</span><span class="p">);</span>
+<span class="n">IRestResponse</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">client</span><span class="p">.</span><span class="nf">ExecuteAsync</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
+<span class="n">Translator</span> <span class="n">translator</span> <span class="p">=</span> <span class="n">JsonSerializer</span><span class="p">.</span><span class="n">Deserialize</span><span class="p">&lt;</span><span class="n">Translator</span><span class="p">&gt;(</span><span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">,</span> <span class="k">new</span> <span class="n">JsonSerializerOptions</span> <span class="p">{</span>
+    <span class="n">PropertyNameCaseInsensitive</span> <span class="p">=</span> <span class="k">true</span>
+<span class="p">});</span>
+</code></pre></div>
+<blockquote>
+<p>The endpoint returns a JSON object like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"languages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"English"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"nativeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"English"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ja"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Japanese"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"nativeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"日本語"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Verified"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"userID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"auth0|60cafad9612d820070a6c388"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kamishirotaishi"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"profilePictureUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s.gravatar.com/avatar/50202936063379c31b0b03084eb48067?s=480&amp;r=pg&amp;d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fka.png"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>Finds a specific translator, using their User ID.</p>
+<h3 id='http-request-7'>HTTP Request</h3>
+<p><code>GET https://api.livetl.app/translators/{user_id}</code></p>
+<h3 id='url-parameters-7'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user_id</td>
+<td>The ID of the user to find</td>
+</tr>
+</tbody></table>
+<h3 id='possible-http-response-status-codes-7'>Possible HTTP Response Status Codes</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200 OK</td>
+<td>The API found and returned the translator with the specified ID</td>
+</tr>
+<tr>
+<td>404 Not Found</td>
+<td>There is no translator with the specified ID</td>
+</tr>
+</tbody></table>
+<h2 id='register-as-translator'>Register as Translator</h2>
+<blockquote>
+<p>This endpoint requires <a href="#authentication">Authentication</a></p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://api.livetl.app/translators/register</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">method</span><span class="p">:</span> <span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+        <span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer {your_access_token}</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+    <span class="p">},</span>
+    <span class="na">body</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">([</span>
+        <span class="dl">"</span><span class="s2">en</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">ja</span><span class="dl">"</span>
+    <span class="p">])</span>
+<span class="p">});</span>
+<span class="kd">let</span> <span class="nx">success</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">200</span><span class="p">;</span>
+</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="n">StringContent</span> <span class="n">content</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">StringContent</span><span class="p">(</span><span class="n">JsonSerializer</span><span class="p">.</span><span class="nf">Serialize</span><span class="p">(</span><span class="k">new</span> <span class="kt">string</span><span class="p">[]</span> <span class="p">{</span>
+    <span class="s">"en"</span><span class="p">,</span> <span class="s">"ja"</span>
+<span class="p">}),</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">"application/json"</span><span class="p">);</span>
+<span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">client</span><span class="p">.</span><span class="nf">PostAsync</span><span class="p">(</span><span class="s">"https://api.livetl.app/translators/register"</span><span class="p">,</span> <span class="n">content</span><span class="p">);</span>
+<span class="kt">bool</span> <span class="n">success</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">IsSuccessStatusCode</span><span class="p">;</span>
+</code></pre></div>
+<p>Registers a LiveTL Auth0 user as a translator with the API.</p>
+
+<p>This endpoint requires <a href="#authentication">Authentication</a>.</p>
+<h3 id='http-request-8'>HTTP Request</h3>
+<p><code>POST https://api.livetl.app/translators/register</code></p>
+<h3 id='request-body-4'>Request Body</h3>
+<p>The body of this request is not an object with properties, but rather a single JSON array. Other translator information
+required by the API will be retrieved from the Auth0 user information.</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Required</th>
+<th>Description</th>
+<th>Constraints</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Languages</td>
+<td>Yes</td>
+<td>The languages the translator is able to translate to/from</td>
+<td>JSON Array of <a href="https://en.wikipedia.org/wiki/ISO_639-1">ISO 639-1 Language Codes</a></td>
+</tr>
+</tbody></table>
+<h3 id='possible-http-response-status-codes-8'>Possible HTTP Response Status Codes</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200 OK</td>
+<td>The API successfully registered the user as a translator</td>
+</tr>
+<tr>
+<td>400 Bad Request</td>
+<td>You didn&#39;t include any translatable languages, or the ones you included are not valid</td>
+</tr>
+<tr>
+<td>400 Bad Request</td>
+<td>You have already registered as a translator</td>
+</tr>
+<tr>
+<td>500 Server Error</td>
+<td>The API encountered an error when retrieving user information from Auth0</td>
+</tr>
+<tr>
+<td>500 Server Error</td>
+<td>The API encountered an error when registering the translator</td>
+</tr>
+<tr>
+<td>500 Server Error</td>
+<td>The API encountered an error when adding permission roles to the user on Auth0</td>
+</tr>
+</tbody></table>
+<h1 id='languages-2'>Languages</h1>
+<p>The API uses <a href="https://en.wikipedia.org/wiki/ISO_639-1">ISO 639-1 Languages</a> as it&#39;s list of supported languages, and the
+language object is just it&#39;s way to represent those.</p>
+
+<p>The language object contains the following properties:</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Code</td>
+<td>string</td>
+<td>The 2-character, unique identifier of the language</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>string</td>
+<td>The name of the language as used in English</td>
+</tr>
+<tr>
+<td>NativeName</td>
+<td>string</td>
+<td>The name of the language as used in that language</td>
+</tr>
+</tbody></table>
+<h1 id='contact-us'>Contact us</h1>
 <p>If you have any questions or concerns about the API, feel free to join
-the <a href="https://discord.gg/uJrV3tmthg">LiveTL Discord Server</a> and ask in the #public-dev-discussion channel. The primary
-developer/maintainer of the API is Akuma (GrumpyBear57#8196), so it&#39;s likely that he will handle any requests or
-questions you have. </p>
+the <a href="https://livetl.app/discord" target="_blank">LiveTL Discord Server</a> and ask in the
+<code>#public-dev-discussion</code> channel. The primary developer/maintainer of the API is Akuma (<code>GrumpyBear57#8196</code>), so it&#39;s
+likely that he will handle any requests or questions you have. </p>
 
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="javascript">javascript</a>
-                <a href="#" data-language-name="csharp">csharp</a>
+                <a href="#" data-language-name="javascript">Javascript</a>
+                <a href="#" data-language-name="csharp">C#</a>
           </div>
       </div>
     </div>
